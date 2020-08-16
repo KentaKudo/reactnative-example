@@ -4,8 +4,8 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: "space-around",
     alignItems: "center",
+    justifyContent: "space-around",
     backgroundColor: "ghostwhite",
     ...Platform.select({
       ios: { paddingTop: 20 },
