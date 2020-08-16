@@ -1,46 +1,40 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Button } from "react-native";
 
-import Row from "./components/Row";
-import Column from "./components/Column";
-import Box from "./components/Box";
-import styles from "./styles";
+import Home from "./components/Home";
+import Details from "./components/Details";
+import Settings from "./components/Settings";
+import * as ROUTES from "./routes";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Row>
-        <Column>
-          <Box>#1</Box>
-          <Box>#2</Box>
-        </Column>
-        <Column>
-          <Box>#3</Box>
-          <Box>#4</Box>
-        </Column>
-      </Row>
-      <Row>
-        <Column>
-          <Box>#5</Box>
-          <Box>#6</Box>
-        </Column>
-        <Column>
-          <Box>#7</Box>
-          <Box>#8</Box>
-        </Column>
-      </Row>
-      <Row>
-        <Column>
-          <Box>#9</Box>
-          <Box>#10</Box>
-        </Column>
-        <Column>
-          <Box>#11</Box>
-          <Box>#12</Box>
-        </Column>
-      </Row>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName={ROUTES.HOME}>
+        <Stack.Screen
+          name={ROUTES.HOME}
+          component={Home}
+          options={{ title: ROUTES.HOME }}
+        />
+        <Stack.Screen
+          name={ROUTES.DETAILS}
+          component={Details}
+          options={({ route }) => {
+            const { title, stock } = route.params;
+
+            return {
+              title,
+              headerRight: () => (
+                <Button title="Buy" onPress={() => {}} disabled={stock === 0} />
+              ),
+            };
+          }}
+        />
+        <Stack.Screen name={ROUTES.SETTINGS} component={Settings} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
