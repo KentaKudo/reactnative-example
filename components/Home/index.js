@@ -1,48 +1,43 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { Button } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-import styles from "./styles";
+import List from "../List";
+import Details from "../Details";
 import StockContext from "../stock";
 import * as ROUTES from "../../routes";
 
-const Home = ({ navigation }) => {
-  const { stock } = React.useContext(StockContext);
-  const { first, second, third } = stock;
+const Stack = createStackNavigator();
+
+const Home = () => {
+  const { stock, updateStock } = React.useContext(StockContext);
 
   return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Button
-        title={`First Item (${first})`}
-        onPress={() =>
-          navigation.navigate(ROUTES.DETAILS, {
-            id: "first",
-            title: "First Item",
-            content: "First Item Content",
-          })
-        }
+    <Stack.Navigator>
+      <Stack.Screen
+        name={ROUTES.LIST}
+        component={List}
+        options={{ title: ROUTES.LIST }}
       />
-      <Button
-        title={`Second Item (${second})`}
-        onPress={() =>
-          navigation.navigate(ROUTES.DETAILS, {
-            id: "second",
-            title: "Second Item",
-            content: "Second Item Content",
-          })
-        }
+      <Stack.Screen
+        name={ROUTES.DETAILS}
+        component={Details}
+        options={({ route }) => {
+          const { title, id } = route.params;
+
+          return {
+            title,
+            headerRight: () => (
+              <Button
+                title="Buy"
+                onPress={() => updateStock(id)}
+                disabled={stock[id] === 0}
+              />
+            ),
+          };
+        }}
       />
-      <Button
-        title={`Third Item (${third})`}
-        onPress={() =>
-          navigation.navigate(ROUTES.DETAILS, {
-            id: "third",
-            title: "Third Item",
-            content: "Third Item Content",
-          })
-        }
-      />
-    </View>
+    </Stack.Navigator>
   );
 };
 
