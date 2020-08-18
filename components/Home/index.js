@@ -2,42 +2,48 @@ import React from "react";
 import { View, Text, Button } from "react-native";
 
 import styles from "./styles";
+import StockContext from "../stock";
 import * as ROUTES from "../../routes";
 
-const Home = ({ navigation }) => (
-  <View style={styles.container}>
-    <Text>Home Screen</Text>
-    <Button
-      title="First Item"
-      onPress={() =>
-        navigation.navigate(ROUTES.DETAILS, {
-          title: "First Item",
-          content: "First Item Content",
-          stock: 1,
-        })
-      }
-    />
-    <Button
-      title="Second Item"
-      onPress={() =>
-        navigation.navigate(ROUTES.DETAILS, {
-          title: "Second Item",
-          content: "Second Item Content",
-          stock: 0,
-        })
-      }
-    />
-    <Button
-      title="Third Item"
-      onPress={() =>
-        navigation.navigate(ROUTES.DETAILS, {
-          title: "Third Item",
-          content: "Third Item Content",
-          stock: 200,
-        })
-      }
-    />
-  </View>
-);
+const Home = ({ navigation }) => {
+  const { stock } = React.useContext(StockContext);
+  const { first, second, third } = stock;
+
+  return (
+    <View style={styles.container}>
+      <Text>Home Screen</Text>
+      <Button
+        title={`First Item (${first})`}
+        onPress={() =>
+          navigation.navigate(ROUTES.DETAILS, {
+            id: "first",
+            title: "First Item",
+            content: "First Item Content",
+          })
+        }
+      />
+      <Button
+        title={`Second Item (${second})`}
+        onPress={() =>
+          navigation.navigate(ROUTES.DETAILS, {
+            id: "second",
+            title: "Second Item",
+            content: "Second Item Content",
+          })
+        }
+      />
+      <Button
+        title={`Third Item (${third})`}
+        onPress={() =>
+          navigation.navigate(ROUTES.DETAILS, {
+            id: "third",
+            title: "Third Item",
+            content: "Third Item Content",
+          })
+        }
+      />
+    </View>
+  );
+};
 
 export default Home;
