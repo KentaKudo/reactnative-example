@@ -1,11 +1,12 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 
+import ListContainer from "../ListContainer";
 import styles from "./styles";
 
 const News = () => (
   <View style={styles.container}>
-    <Text>News</Text>
+    <ListContainer />
   </View>
 );
 

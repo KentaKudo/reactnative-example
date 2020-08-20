@@ -5,7 +5,7 @@ import styles from "./styles";
 import StockContext from "../stock";
 import * as ROUTES from "../../routes";
 
-const List = ({ navigation }) => {
+const ItemList = ({ navigation }) => {
   const { stock } = React.useContext(StockContext);
   const { first, second, third } = stock;
 
@@ -46,4 +46,4 @@ const List = ({ navigation }) => {
   );
 };
 
-export default List;
+export default ItemList;

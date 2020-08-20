@@ -9,6 +9,7 @@ import News from "./components/News";
 import Settings from "./components/Settings";
 import StockContext from "./components/stock";
 import * as ROUTES from "./routes";
+import { StatusBar } from "expo-status-bar";
 
 const { Navigator } = Platform.select({
   ios: { Navigator: createBottomTabNavigator() },
@@ -29,6 +30,7 @@ export default function App() {
   return (
     <StockContext.Provider value={{ stock, updateStock }}>
       <NavigationContainer>
+        <StatusBar style="auto" />
         <Navigator.Navigator initialRouteName={ROUTES.HOME}>
           <Navigator.Screen
             name={ROUTES.HOME}
