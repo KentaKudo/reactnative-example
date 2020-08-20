@@ -7,6 +7,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Home from "./components/Home";
 import News from "./components/News";
 import Form from "./components/Form";
+import Gesture from "./components/Gesture";
 import Settings from "./components/Settings";
 import StockContext from "./components/stock";
 import * as ROUTES from "./routes";
@@ -47,6 +48,11 @@ export default function App() {
             name={ROUTES.FORM}
             component={Form}
             options={{ title: ROUTES.FORM }}
+          />
+          <Navigator.Screen
+            name={ROUTES.GESTURE}
+            component={Gesture}
+            options={{ title: ROUTES.GESTURE }}
           />
           <Navigator.Screen
             name={ROUTES.SETTINGS}
