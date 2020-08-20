@@ -6,6 +6,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Home from "./components/Home";
 import News from "./components/News";
+import Form from "./components/Form";
 import Settings from "./components/Settings";
 import StockContext from "./components/stock";
 import * as ROUTES from "./routes";
@@ -41,6 +42,11 @@ export default function App() {
             name={ROUTES.NEWS}
             component={News}
             options={{ title: ROUTES.NEWS }}
+          />
+          <Navigator.Screen
+            name={ROUTES.FORM}
+            component={Form}
+            options={{ title: ROUTES.FORM }}
           />
           <Navigator.Screen
             name={ROUTES.SETTINGS}
